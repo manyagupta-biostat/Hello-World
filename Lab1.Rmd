@@ -1,0 +1,37 @@
+---
+title: "Lab1"
+author: "Manya Gupta"
+date: "2026-09-09"
+output: pdf_document
+---
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+#ALWAYS COMMENT OUT ALL INSTALL PACKAGES
+
+setwd("C:/Users/manya/OneDrive - Brown University/Documents/Brown masters Biostats")
+anxiety_data<-read.csv("AnxietyData.csv", header=TRUE)
+nrow(anxiety_data)
+names(anxiety_data)
+
+#install.packages("pastecs")
+library(pastecs)
+
+stat.desc(anxiety_data$Anxiety)
+round( stat.desc(anxiety_data$Anxiety ), 2)
+round( stat.desc(anxiety_data$Exam), 2)
+cor( anxiety_data$Anxiety, anxiety_data$Exam, method="spearman" )
+table(anxiety_data$Gender)
+
+is.factor(anxiety_data$Gender)
+anxiety_data$Gender <- as.factor(anxiety_data$Gender)
+is.factor(anxiety_data$Gender)
+is.numeric(anxiety_data$Anxiety)
+
+by(anxiety_data$Anxiety, anxiety_data$Gender, mean)
+by(anxiety_data$Anxiety, anxiety_data$Gender, sum)
+by(anxiety_data$Anxiety, anxiety_data$Gender, stat.desc)
+by(anxiety_data$Anxiety, anxiety_data$Gender, function(X) round(stat.desc(X, 2)))
+
+
+```
+
